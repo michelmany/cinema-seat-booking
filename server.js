@@ -3,8 +3,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const mongoose = require('./config/mongo'); // Establishes MongoDB connection
+
 const sessionRoutes = require('./routes/sessionRoutes');
 const reservationRoutes = require('./routes/reservationRoutes');
+const metricsRoutes = require('./routes/metricsRoutes');
+
 const path = require('path');
 
 const app = express();
@@ -20,6 +23,7 @@ app.use(bodyParser.json());
 // API Routes
 app.use('/sessions', sessionRoutes);
 app.use('/reservations', reservationRoutes);
+app.use('/metrics', metricsRoutes);
 
 app.get('/health', (req, res) => {
     res.json({ status: 'Server is running' });

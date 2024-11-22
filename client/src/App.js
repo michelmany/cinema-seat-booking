@@ -7,7 +7,19 @@ const App = () => {
     const [selectedSession, setSelectedSession] = useState(null);
     const [seats, setSeats] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
-    const [userId] = useState('test_user_id'); // Replace with actual user ID
+    const [userId] = useState('test_user_id');
+    const [metrics, setMetrics] = useState(null);
+
+    // Fetch metrics
+    const fetchMetrics = () => {
+        fetch(`${BASE_URL}/metrics`)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log('Metrics fetched:', data); // Debug log
+                setMetrics(data);
+            })
+            .catch((error) => console.error('Error fetching metrics:', error));
+    };
 
     // Fetch cinema sessions
     useEffect(() => {
@@ -64,6 +76,23 @@ const App = () => {
     return (
         <div style={{padding: '20px'}}>
             <h1>Cinema Seat Booking</h1>
+
+            <button onClick={fetchMetrics}>Show Metrics</button>
+
+            {metrics && (
+                <div>
+                    <h2>System Metrics</h2>
+                    <ul>
+                        <li>Total Sessions: {metrics.totalSessions}</li>
+                        <li>Total Reservations: {metrics.totalReservations}</li>
+                        <li>Total Users: {metrics.totalUsers}</li>
+                        <li>Successful Reservation Rate: {metrics.successfulRate}%</li>
+                        <li>Average Reservation Latency: {metrics.averageLatency}ms</li>
+                        <li>Conflict Rate: {metrics.conflictRate}%</li>
+                        <li>Active Sessions: {metrics.activeSessions}</li>
+                    </ul>
+                </div>
+            )}
 
             <h2>Sessions</h2>
             {sessions.map((session) => (
