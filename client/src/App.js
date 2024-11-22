@@ -47,7 +47,7 @@ const App = () => {
             return;
         }
 
-        fetch(`${BASE_URL}/sessions/${selectedSession}/seats/reserve`, {
+        fetch(`${BASE_URL}/reservations/${selectedSession}/seats/reserve`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({seatNumbers: selectedSeats, userId}),

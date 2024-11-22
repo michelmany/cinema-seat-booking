@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
     sessionId: {type: mongoose.Schema.Types.ObjectId, ref: 'Session'},
-    userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    userId: {type: String, ref: 'User'},
     seats: [String],
 });
 

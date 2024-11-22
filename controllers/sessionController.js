@@ -1,4 +1,5 @@
 const Session = require('../models/session');
+const Hall = require('../models/hall');
 
 exports.getSessions = async (req, res) => {
     const sessions = await Session.find().populate('hallId');
